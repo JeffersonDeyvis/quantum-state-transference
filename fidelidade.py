@@ -9,16 +9,18 @@ start_time = time.time()
 
 # Definir a desordem correlacionada:
 
-def rand(A,N):
+def rand(A, N):
     z = np.random.random(N)*2-1
-    j = np.linspace(1,N,N,endpoint=True)
-    Y = np.vectorize(lambda i: sum(z/np.power(1+abs(i-j)/A,2)))(j) 
-    e = [(x - np.average(Y))/np.std(Y) for x in Y]   
+    j = np.linspace(1, N, N, endpoint=True)
+    Y = np.vectorize(lambda i: sum(z/np.power(1+abs(i-j)/A, 2)))(j) 
+    e = [(x - np.average(Y))/np.std(Y) for x in Y] 
+
     return e
 
 # Definir o hamiltoniano e a diagonalização:
     
 def eight_sates(A, E, g, N):
+
     first_diagonal          = rand(A, N)
     second_diagonal         = np.ones(N-1)
     first_diagonal[0]       = E
@@ -31,6 +33,7 @@ def eight_sates(A, E, g, N):
 # Definir o cáculo da fidelidade do sistema:
 
 def fidelidade(evals,evecs,N):
+    
     dt      = (0)
     box     = []
     while dt <= 2*10**6:
